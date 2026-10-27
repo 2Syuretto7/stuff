@@ -119,3 +119,9 @@ body {
   .foot { position: relative; right: auto; bottom: auto; padding: 0 16px 32px; }
   .card { position: fixed; top: auto; bottom: 16px; right: 16px; }
 }
+
+@media (max-width: 760px) {
+  .body .label { font-size: 11px; }
+  .body.on .label { font-size: 13px; }
+  #sky .body:not(.on) .label { opacity: .85; }
+}

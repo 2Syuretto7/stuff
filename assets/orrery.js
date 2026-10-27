@@ -67,7 +67,7 @@
     coreText.setAttribute("x", cx); coreText.setAttribute("y", cy);
     bodies.forEach(b => {
       b.rx = R0 + gap * b.i;
-      b.ry = b.rx * 0.38;
+      b.ry = b.rx * (narrow ? 0.56 : 0.38);
       b.ring.setAttribute("cx", cx); b.ring.setAttribute("cy", cy);
       b.ring.setAttribute("rx", b.rx); b.ring.setAttribute("ry", b.ry);
       b.ring.setAttribute("transform", `rotate(${TILT * 180 / Math.PI} ${cx} ${cy})`);
@@ -132,7 +132,8 @@
       if (front !== b.front) { (front ? frontG : backG).appendChild(b.g); b.front = front; }
       const s = 0.72 + 0.28 * (depth + 1) / 2;
       b.dot.setAttribute("cx", x); b.dot.setAttribute("cy", y); b.dot.setAttribute("r", b.size * s);
-      const flip = x > innerWidth - 150;
+      if (!b.lw) b.lw = b.label.getComputedTextLength() || b.it.name.length * 8.5;
+      const flip = x + b.size * s + 8 + b.lw > innerWidth - 12;
       b.label.setAttribute("text-anchor", flip ? "end" : "start");
       b.label.setAttribute("x", flip ? x - b.size * s - 8 : x + b.size * s + 8);
       b.label.setAttribute("y", y - b.size * s * 0.9);
@@ -147,7 +148,7 @@
     requestAnimationFrame(frame);
   }
 
-  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(layout, 120); });
+  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { bodies.forEach(b => b.lw = 0); layout(); }, 120); });
   layout();
   requestAnimationFrame(frame);
 })();
