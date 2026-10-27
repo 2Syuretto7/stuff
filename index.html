@@ -7,35 +7,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>stuff / arnav raja</title>
 <meta name="description" content="{{ site.description }}">
-<meta name="theme-color" content="#ff6a2b">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ff6a2b'/%3E%3Cellipse cx='16' cy='16' rx='12' ry='6' stroke='%231d0f3f' stroke-width='2' fill='none' transform='rotate(-25 16 16)'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%231d0f3f'/%3E%3Ccircle cx='26' cy='11' r='2.5' fill='%23fff4e8'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#123c37">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23123c37'/%3E%3Cpath d='M6 24 C10 18 12 20 16 14 S22 8 26 7' stroke='%23ffcf6e' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M16 14 C17 19 21 21 25 24' stroke='%237ea860' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='26' cy='7' r='2.6' fill='%23ff4f7a'/%3E%3Ccircle cx='25' cy='24' r='2.2' fill='%23ff4f7a'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/stuff.css?v={{ site.time | date: '%s' }}">
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/culture.css?v={{ site.time | date: '%s' }}">
 </head>
 <body>
+<canvas id="culture" aria-hidden="true"></canvas>
+
 <header class="top">
   <h1>stuff</h1>
   <p>{{ site.description }}</p>
 </header>
 
-<svg id="sky" aria-hidden="true"></svg>
+<nav id="specimens" aria-label="Things in the culture"></nav>
 
-<div class="clock" id="clock" aria-hidden="true">time &times;1.0</div>
-
-<section class="ledger" aria-label="Everything in orbit">
-  <h2>{{ site.data.stuff | size }} bodies</h2>
-  <ul id="ledger"></ul>
-  <p class="how">Scroll to bend time. Hover to stop it.</p>
-</section>
+<p class="hint" id="hint">Hold anywhere to feed it.</p>
 
 <aside class="card" id="card" aria-live="polite" hidden>
-  <button class="close" id="close" aria-label="Close">close</button>
+  <button class="close" id="close" type="button">Close</button>
   <p class="meta" id="c-meta"></p>
   <h2 id="c-name"></h2>
-  <p id="c-note"></p>
-  <a id="c-link" target="_blank" rel="noopener">Go there</a>
+  <p class="note" id="c-note"></p>
+  <a id="c-link">Go there</a>
 </aside>
 
 <footer class="foot">
@@ -43,7 +39,9 @@
   <a href="https://blog.arnavraja.in">blog</a>
 </footer>
 
+<noscript><ul class="plain">{% for t in site.data.stuff %}<li>{% if t.link %}<a href="{{ t.link }}">{{ t.name }}</a>{% else %}{{ t.name }}{% endif %}</li>{% endfor %}</ul></noscript>
+
 <script>window.STUFF = {{ site.data.stuff | jsonify }};</script>
-<script src="assets/orrery.js?v={{ site.time | date: '%s' }}"></script>
+<script src="assets/culture.js?v={{ site.time | date: '%s' }}"></script>
 </body>
 </html>

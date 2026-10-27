@@ -1,4 +1,4 @@
-# Everything in the orrery comes from this list.
+# Everything the culture feeds on comes from this list.
 # To add a thing, copy one block below, paste it at the end, and change the words.
 # Only "name" is required. Everything else is optional.
 #
@@ -20,10 +20,10 @@
   note: Sentences in the process of becoming true. Every page carries its own words on the reverse side.
   link: https://blog.arnavraja.in
 
-- name: this orrery
-  kind: cabinet
+- name: this culture
+  kind: organism
   year: 2026
-  note: You are inside it. Each thing added here becomes a body with its own orbit, and none of them agree on what time it is.
+  note: You are looking at it. Tens of thousands of blind agents follow one another's trails, and everything listed here is food. Nobody drew these paths. Hold anywhere and it will come for you too.
 
 - name: "Ashwater: The Bell Debt"
   kind: game
