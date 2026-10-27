@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/stuff.css">
+<link rel="stylesheet" href="assets/stuff.css?v={{ site.time | date: '%s' }}">
 </head>
 <body>
 <header class="top">
@@ -44,6 +44,6 @@
 </footer>
 
 <script>window.STUFF = {{ site.data.stuff | jsonify }};</script>
-<script src="assets/orrery.js"></script>
+<script src="assets/orrery.js?v={{ site.time | date: '%s' }}"></script>
 </body>
 </html>

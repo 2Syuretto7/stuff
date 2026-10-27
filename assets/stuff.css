@@ -141,3 +141,6 @@ body {
     overflow-y: auto;
   }
 }
+
+/* Halo so orbit lines and trails break around label text. */
+.body .label { paint-order: stroke; stroke: var(--flare); stroke-width: 5px; stroke-linejoin: round; }
