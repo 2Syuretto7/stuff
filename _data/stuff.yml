@@ -24,9 +24,3 @@
   kind: cabinet
   year: 2026
   note: You are inside it. Each thing added here becomes a body with its own orbit, and none of them agree on what time it is.
-
-- name: "Ashwater: The Bell Debt"
-  kind: game
-  year: 2026
-  note: A game that runs in the browser. The title names a debt; the only way to learn what is owed is to play. Needs a computer with WebGL.
-  link: https://claude.ai/artifact/3EHRsm2g95csoBApGYzxPD
