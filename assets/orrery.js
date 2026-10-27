@@ -23,12 +23,12 @@
   let cx, cy, R0, gap, sx;
   const bodies = items.map((it, i) => {
     const h = hash(it.name + i);
-    const g = el("g", { class: "body", tabindex: "-1" }, frontG);
+    const g = el("g", { class: "body" }, frontG);
     const ring = el("ellipse", { class: "ring" }, orbitsG);
     const trail = el("path", { class: "trail" }, g);
     const dot = el("circle", { class: "dot" }, g);
     const label = el("text", { class: "label" }, g);
-    label.textContent = it.name;
+    label.textContent = it.name.toLowerCase();
     const b = { it, i, g, ring, trail, dot, label, a: h * Math.PI * 2, size: 5 + h * 9, dir: h > 0.86 ? -1 : 1, front: true };
     g.addEventListener("pointerenter", () => focusBody(b, true));
     g.addEventListener("pointerleave", () => focusBody(null, true));
@@ -132,7 +132,7 @@
       if (front !== b.front) { (front ? frontG : backG).appendChild(b.g); b.front = front; }
       const s = 0.72 + 0.28 * (depth + 1) / 2;
       b.dot.setAttribute("cx", x); b.dot.setAttribute("cy", y); b.dot.setAttribute("r", b.size * s);
-      if (!b.lw) b.lw = b.label.getComputedTextLength() || b.it.name.length * 8.5;
+      b.lw = b.label.getComputedTextLength() || b.it.name.length * 8.5;
       const flip = x + b.size * s + 8 + b.lw > innerWidth - 12;
       b.label.setAttribute("text-anchor", flip ? "end" : "start");
       b.label.setAttribute("x", flip ? x - b.size * s - 8 : x + b.size * s + 8);
