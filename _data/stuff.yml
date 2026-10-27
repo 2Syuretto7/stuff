@@ -1,4 +1,4 @@
-# Everything the culture feeds on comes from this list.
+# Every station on the dial comes from this list.
 # To add a thing, copy one block below, paste it at the end, and change the words.
 # Only "name" is required. Everything else is optional.
 #
@@ -17,13 +17,8 @@
 - name: blog
   kind: writing
   year: 2026
-  note: Sentences in the process of becoming true. Every page carries its own words on the reverse side.
+  note: Everything written there is slowly being forgotten, letter by letter. Reading a passage is the only way to bring it back.
   link: https://blog.arnavraja.in
-
-- name: this culture
-  kind: organism
-  year: 2026
-  note: You are looking at it. Tens of thousands of blind agents follow one another's trails, and everything listed here is food. Nobody drew these paths. Hold anywhere and it will come for you too.
 
 - name: "Ashwater: The Bell Debt"
   kind: game

@@ -7,41 +7,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>stuff / arnav raja</title>
 <meta name="description" content="{{ site.description }}">
-<meta name="theme-color" content="#123c37">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23123c37'/%3E%3Cpath d='M6 24 C10 18 12 20 16 14 S22 8 26 7' stroke='%23ffcf6e' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M16 14 C17 19 21 21 25 24' stroke='%237ea860' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='26' cy='7' r='2.6' fill='%23ff4f7a'/%3E%3Ccircle cx='25' cy='24' r='2.2' fill='%23ff4f7a'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#c9c3b8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23c9c3b8'/%3E%3Cg fill='%231d1a16'%3E%3Crect x='4' y='6' width='3' height='3'/%3E%3Crect x='13' y='4' width='3' height='3'/%3E%3Crect x='22' y='9' width='3' height='3'/%3E%3Crect x='8' y='13' width='3' height='3'/%3E%3Crect x='19' y='16' width='3' height='3'/%3E%3C/g%3E%3Crect x='3' y='24' width='26' height='2' fill='%231d1a16'/%3E%3Crect x='17' y='20' width='2' height='10' fill='%23e5341d'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/culture.css?v={{ site.time | date: '%s' }}">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/radio.css?v={{ site.time | date: '%s' }}">
 </head>
 <body>
-<canvas id="culture" aria-hidden="true"></canvas>
+<canvas id="static" aria-hidden="true"></canvas>
 
 <header class="top">
   <h1>stuff</h1>
   <p>{{ site.description }}</p>
+  <nav class="elsewhere" aria-label="Elsewhere">
+    <a href="https://arnavraja.in">arnavraja.in</a>
+    <a href="https://blog.arnavraja.in">blog</a>
+  </nav>
 </header>
 
-<nav id="specimens" aria-label="Things in the culture"></nav>
+<div class="readout" aria-hidden="true">
+  <span id="freq">00.0</span><span class="unit">MHz</span>
+  <span class="bars" id="bars"><i></i><i></i><i></i><i></i><i></i></span>
+</div>
+<button class="sound" id="sound" type="button" aria-pressed="false">Sound off</button>
 
-<p class="hint" id="hint">Hold anywhere to feed it.</p>
+<section class="signal" id="signal" aria-live="polite">
+  <h2 class="sr" id="s-name"></h2>
+  <p class="meta" id="s-meta"></p>
+  <p class="note" id="s-note"></p>
+  <a class="go" id="s-link">Go there</a>
+</section>
 
-<aside class="card" id="card" aria-live="polite" hidden>
-  <button class="close" id="close" type="button">Close</button>
-  <p class="meta" id="c-meta"></p>
-  <h2 id="c-name"></h2>
-  <p class="note" id="c-note"></p>
-  <a id="c-link">Go there</a>
-</aside>
+<p class="hint" id="hint">Drag, scroll or use the arrow keys to tune.</p>
 
-<footer class="foot">
-  <a href="https://arnavraja.in">arnavraja.in</a>
-  <a href="https://blog.arnavraja.in">blog</a>
-</footer>
+<div class="tuner">
+  <button class="seek" id="seek-down" type="button">Seek down</button>
+  <div class="dial" id="dial" role="slider" tabindex="0" aria-label="Frequency" aria-valuemin="87.5" aria-valuemax="108" aria-valuenow="87.5">
+    <div class="ticks" id="ticks"></div>
+    <div class="needle" id="needle"></div>
+  </div>
+  <button class="seek" id="seek-up" type="button">Seek up</button>
+</div>
 
-<noscript><ul class="plain">{% for t in site.data.stuff %}<li>{% if t.link %}<a href="{{ t.link }}">{{ t.name }}</a>{% else %}{{ t.name }}{% endif %}</li>{% endfor %}</ul></noscript>
+<ul class="sr" aria-label="Everything on the dial">{% for t in site.data.stuff %}<li>{% if t.link %}<a href="{{ t.link }}">{{ t.name }}</a>{% else %}{{ t.name }}{% endif %}</li>{% endfor %}</ul>
 
 <script>window.STUFF = {{ site.data.stuff | jsonify }};</script>
-<script src="assets/culture.js?v={{ site.time | date: '%s' }}"></script>
+<script src="assets/radio.js?v={{ site.time | date: '%s' }}"></script>
 </body>
 </html>

@@ -1,0 +1,166 @@
+:root {
+  --paper: #f2eee6;
+  --grain: #c9c3b8;
+  --ink: #1d1a16;
+  --dim: #5d574e;
+  --red: #e5341d;
+  --gutter: clamp(16px, 3.5vw, 44px);
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--grain);
+  color: var(--ink);
+  font-family: "Archivo", system-ui, sans-serif;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+#static {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  display: block;
+  image-rendering: pixelated;
+  cursor: ew-resize;
+  touch-action: none;
+}
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Labels sit on solid chips so they read over static. */
+.top, .readout, .sound, .signal, .hint, .tuner { position: fixed; z-index: 2; }
+
+.top { top: var(--gutter); left: var(--gutter); max-width: min(340px, 60vw); }
+.top h1 {
+  display: inline-block;
+  margin: 0;
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  background: var(--ink); color: var(--paper);
+  padding: 4px 8px 5px;
+}
+.top p {
+  margin: 6px 0 0;
+  display: inline;
+  font-size: 15px;
+  line-height: 1.55;
+  background: var(--paper);
+  padding: 2px 6px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.elsewhere { margin-top: 12px; display: flex; gap: 6px; }
+.elsewhere a {
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--paper);
+  padding: 3px 7px 4px;
+  text-decoration: none;
+}
+.elsewhere a:hover, .elsewhere a:focus-visible { background: var(--ink); color: var(--paper); outline: none; }
+
+.readout {
+  top: var(--gutter); right: var(--gutter);
+  display: flex; align-items: baseline; gap: 6px;
+  background: var(--ink); color: var(--paper);
+  padding: 6px 12px 8px;
+}
+#freq { font-family: "Archivo Black", sans-serif; font-size: clamp(26px, 3.4vw, 40px); font-variant-numeric: tabular-nums; line-height: 1; }
+.unit { font-size: 12px; opacity: .7; }
+.bars { display: inline-flex; align-items: flex-end; gap: 2px; height: 18px; margin-left: 8px; }
+.bars i { width: 4px; background: rgba(242, 238, 230, .25); }
+.bars i:nth-child(1) { height: 20%; } .bars i:nth-child(2) { height: 40%; } .bars i:nth-child(3) { height: 60%; }
+.bars i:nth-child(4) { height: 80%; } .bars i:nth-child(5) { height: 100%; }
+.bars i.on { background: var(--red); }
+
+.sound {
+  top: calc(var(--gutter) + clamp(46px, 5vw, 58px));
+  right: var(--gutter);
+  font: 600 12px "Archivo", sans-serif;
+  border: 0; cursor: pointer;
+  background: var(--paper); color: var(--ink);
+  padding: 4px 8px 5px;
+}
+.sound[aria-pressed="true"] { background: var(--red); color: var(--paper); }
+.sound:focus-visible, .seek:focus-visible, .dial:focus-visible, .go:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+/* What the station is saying, once it is clear. */
+.signal {
+  left: 50%; top: 66%;
+  transform: translate(-50%, 0);
+  width: min(560px, calc(100% - 32px));
+  text-align: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .35s ease;
+}
+.signal.clear { opacity: 1; pointer-events: auto; }
+.signal .meta, .signal .note {
+  display: inline;
+  background: var(--paper);
+  padding: 2px 6px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.signal .meta { font-size: 13px; color: var(--dim); }
+.signal .note { font-size: 17px; line-height: 1.6; }
+.signal .meta + .note::before { content: ""; display: block; height: 8px; }
+.signal p { margin: 0; }
+.signal p + p { margin-top: 8px; }
+.go {
+  display: table;
+  margin: 16px auto 0;
+  background: var(--ink); color: var(--paper);
+  font-weight: 600;
+  padding: 9px 16px 10px;
+  text-decoration: none;
+}
+.go:hover { background: var(--red); }
+
+.hint {
+  left: 50%; bottom: calc(var(--gutter) + 74px);
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 13px;
+  background: var(--paper);
+  padding: 3px 8px 4px;
+  white-space: nowrap;
+  transition: opacity .8s;
+}
+.hint.gone { opacity: 0; }
+
+/* The dial: unmarked except for the numbers. */
+.tuner {
+  left: var(--gutter); right: var(--gutter); bottom: var(--gutter);
+  display: flex; align-items: stretch; gap: 8px;
+}
+.seek {
+  flex: none;
+  font: 600 12px "Archivo", sans-serif;
+  border: 0; cursor: pointer;
+  background: var(--ink); color: var(--paper);
+  padding: 0 12px;
+}
+.seek:hover { background: var(--red); }
+.dial {
+  position: relative;
+  flex: 1;
+  height: 58px;
+  background: var(--paper);
+  cursor: ew-resize;
+  touch-action: none;
+  overflow: hidden;
+}
+.ticks { position: absolute; inset: 0 10px; }
+.ticks i { position: absolute; bottom: 0; width: 1px; height: 8px; background: var(--ink); opacity: .45; }
+.ticks i.half { height: 14px; opacity: .7; }
+.ticks i.whole { height: 22px; opacity: 1; }
+.ticks b { position: absolute; top: 7px; transform: translateX(-50%); font-size: 11px; font-weight: 600; }
+.needle { position: absolute; top: 0; bottom: 0; width: 3px; margin-left: -1px; background: var(--red); left: 10px; }
+
+@media (max-width: 640px) {
+  .top { max-width: calc(100% - 2 * var(--gutter) - 150px); }
+  #freq { font-size: 24px; }
+  .signal { top: 62%; }
+  .signal .note { font-size: 15px; }
+  .ticks b:nth-of-type(2n) { display: none; }
+  .seek { padding: 0 8px; font-size: 11px; max-width: 64px; white-space: normal; line-height: 1.15; }
+  .hint { white-space: normal; text-align: center; width: max-content; max-width: 80vw; }
+}
