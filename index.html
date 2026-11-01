@@ -24,12 +24,11 @@
       <div class="pane">
         {% if t.kind or t.year %}<p class="meta">{% if t.kind %}{{ t.kind }}{% endif %}{% if t.kind and t.year %}, {% endif %}{% if t.year %}{{ t.year }}{% endif %}</p>{% endif %}
         {% if t.note %}<p class="note">{{ t.note }}</p>{% endif %}
-        {% if t.link %}<a class="go" href="{{ t.link }}">Go there</a>{% endif %}
+        {% if t.link %}<a class="go" href="{{ t.link }}">{{ t.link | remove_first: "https://" | remove_first: "http://" | split: "?" | first | split: "/" | join: "/" }}</a>{% endif %}
       </div>
     </section>
     {% endfor %}
   </div>
-  <p class="hint">Drag a window by its tab. Click one to bring it to the front.</p>
 </div>
 <script src="assets/alto.js?v={{ site.time | date: '%s' }}"></script>
 </body>

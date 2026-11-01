@@ -17,11 +17,11 @@
 - name: blog
   kind: outline
   year: 2026
-  note: Everything written, as one numbered outline, after NLS, 1968. Choose how deep to look.
+  note: Everything written, as one numbered outline, after NLS, 1968.
   link: https://blog.arnavraja.in
 
 - name: "Ashwater: The Bell Debt"
   kind: game
   year: 2026
-  note: An original dark fantasy RPG that runs in the browser. Play it on a computer with a keyboard and mouse.
+  note: An original dark fantasy RPG that runs in the browser.
   link: https://stuff.arnavraja.in/ashwater/
