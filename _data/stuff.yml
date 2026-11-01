@@ -9,15 +9,15 @@
 #   link:  where it lives
 
 - name: arnavraja.in
-  kind: clock
+  kind: drawing
   year: 2026
-  note: A clock that only runs while you keep perfectly still. It remembers every still second you have ever given it.
+  note: A round vector screen and a light pen, after Sketchpad, 1963. Every line you draw has to be retraced by the beam, so the more you draw, the more it all flickers.
   link: https://arnavraja.in
 
 - name: blog
-  kind: writing
+  kind: outline
   year: 2026
-  note: One sentence at a time, pulled loose from everything written there. Follow it back to where it came from.
+  note: Everything written, as one numbered outline, after NLS, 1968. Choose how deep to look.
   link: https://blog.arnavraja.in
 
 - name: "Ashwater: The Bell Debt"
