@@ -84,3 +84,12 @@ body {
 .dragging .pane { visibility: hidden; }
 .dragging { background: transparent; border-style: dashed; }
 
+
+.tab a { color: inherit; text-decoration: none; cursor: var(--arrow), pointer; }
+.tab a:hover { text-decoration: underline; text-underline-offset: .15em; }
+.tab a:focus-visible { outline: 2px solid currentColor; outline-offset: 1px; }
+
+.foot { margin: 0; font-size: 14px; line-height: 1; }
+.foot a { color: #b9b9b0; text-decoration: none; padding: 4px 6px; cursor: var(--arrow), pointer; }
+.foot a:hover { color: #fbfbf6; text-decoration: underline; text-underline-offset: .2em; }
+.foot a:focus-visible { outline: 2px solid #fbfbf6; outline-offset: 2px; }

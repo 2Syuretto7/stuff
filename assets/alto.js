@@ -41,28 +41,36 @@
     w.addEventListener("focusin", () => front(w));
     const tab = w.querySelector(".tab");
     tab.addEventListener("pointerdown", e => {
+      if (e.button > 0) return;
       e.preventDefault();
       tab.setPointerCapture(e.pointerId);
+      const link = e.target.closest("a[href]");
       const r = w.getBoundingClientRect(), sr = screen.getBoundingClientRect();
-      const ox = e.clientX - r.left, oy = e.clientY - r.top;
-      w.classList.add("dragging");
+      const ox = e.clientX - r.left, oy = e.clientY - r.top, sx = e.clientX, sy = e.clientY;
+      let dragging = false;
       const move = ev => {
+        // A tab that only gets pressed is a link; a tab that moves is a handle.
+        if (!dragging && Math.hypot(ev.clientX - sx, ev.clientY - sy) < 5) return;
+        if (!dragging) { dragging = true; w.classList.add("dragging"); }
         const maxX = Math.max(1, sr.width - w.offsetWidth), maxY = Math.max(1, sr.height - w.offsetHeight - 24);
         const x = Math.min(maxX, Math.max(0, ev.clientX - sr.left - ox)), y = Math.min(maxY, Math.max(0, ev.clientY - sr.top - oy));
         w.style.left = x + "px"; w.style.top = y + "px";
         w.dataset.x = x / maxX; w.dataset.y = y / maxY;
       };
-      const up = () => {
+      const up = ev => {
         w.classList.remove("dragging");
         tab.removeEventListener("pointermove", move);
         tab.removeEventListener("pointerup", up);
         tab.removeEventListener("pointercancel", up);
         save();
+        if (!dragging && link && ev.type === "pointerup") location.href = link.href;
       };
       tab.addEventListener("pointermove", move);
       tab.addEventListener("pointerup", up);
       tab.addEventListener("pointercancel", up);
     });
+    // Mouse clicks are handled above; keyboard activation of a tab link still works on its own.
+    tab.addEventListener("click", e => { if (e.detail > 0) e.preventDefault(); });
   });
   let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(layout, 80); });
   if (document.fonts) document.fonts.ready.then(layout);
