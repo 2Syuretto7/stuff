@@ -93,3 +93,24 @@ body {
 .foot a { color: #b9b9b0; text-decoration: none; padding: 4px 6px; cursor: var(--arrow), pointer; }
 .foot a:hover { color: #fbfbf6; text-decoration: underline; text-underline-offset: .2em; }
 .foot a:focus-visible { outline: 2px solid #fbfbf6; outline-offset: 2px; }
+
+/* Folded windows: only the tab remains, packed along the bottom of the screen. */
+.win.collapsed { width: auto; max-width: var(--tabmax, calc(100% - 20px)); border: 0; background: transparent; margin-top: 0; }
+.win.collapsed .pane { display: none; }
+.win.collapsed .tab {
+  position: static;
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: var(--white);
+  color: var(--black);
+  border: 2px solid var(--black);
+  padding: 1px 8px 0;
+  cursor: var(--arrow), pointer;
+}
+.win.collapsed .tab:hover, .win.collapsed .tab:focus-visible { background: var(--black); color: var(--white); outline: none; }
+.win.open .tab { background: var(--black); color: var(--white); border: 0; padding: 2px 10px 1px; }
+.win.open .pane { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #000 #fbfbf6; }
+.doc.open .pane { overflow: visible; }
