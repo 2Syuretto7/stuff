@@ -128,3 +128,98 @@ body {
 .foot a { color: #b9b9b0; text-decoration: none; padding: 4px 6px; cursor: var(--arrow), pointer; }
 .foot a:hover { color: #fbfbf6; text-decoration: underline; text-underline-offset: .2em; }
 .foot a:focus-visible { outline: 2px solid #fbfbf6; outline-offset: 2px; }
+
+/* Writing: mathematics, code, tables, footnotes and figures, in the same one-bit hand. */
+.note > * { margin: 0 0 .55em; line-height: 1.35; }
+.note > :last-child { margin-bottom: .55em; }
+.doc .body, .note { overflow-wrap: break-word; }
+.katex { font-size: 1.05em; }
+.katex-display { margin: .8em 0; padding: .2em 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; scrollbar-color: var(--black) var(--white); }
+.katex-display > .katex { font-size: 1.1em; }
+.katex-error { font-family: "IBM Plex Mono", monospace; font-size: .8em; }
+
+.doc .body code, .note code {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: .82em;
+  padding: 0 .25em;
+  border: 1px solid var(--black);
+  -webkit-font-smoothing: auto;
+}
+.doc .body pre, .note pre {
+  margin: .8em 0;
+  padding: .7em .8em;
+  border: 2px solid var(--black);
+  box-shadow: 3px 3px 0 var(--black);
+  background: var(--white);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--black) var(--white);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: .78em;
+  line-height: 1.5;
+  -webkit-font-smoothing: auto;
+}
+.doc .body pre code, .note pre code { border: 0; padding: 0; font-size: 1em; }
+.doc .body div.highlighter-rouge, .note div.highlighter-rouge { margin: .8em 0; }
+.doc .body div.highlighter-rouge pre, .note div.highlighter-rouge pre { margin: 0; }
+.doc .body .highlighter-rouge::before, .note .highlighter-rouge::before { content: none; }
+div[class*="language-"] { position: relative; margin-top: 1.7em !important; }
+div[class*="language-"]::after {
+  position: absolute; right: 0; top: -1.35em;
+  font-family: "Pixelify Sans", monospace; font-size: .72em; font-weight: 600;
+  padding: 1px 6px;
+  background: var(--black); color: var(--white);
+}
+div.language-python::after { content: "python"; }
+div.language-py::after { content: "python"; }
+div.language-bash::after, div.language-sh::after, div.language-shell::after { content: "shell"; }
+div.language-js::after, div.language-javascript::after { content: "javascript"; }
+div.language-julia::after { content: "julia"; }
+div.language-r::after { content: "r"; }
+div.language-cpp::after, div.language-c\+\+::after { content: "c++"; }
+div.language-c::after { content: "c"; }
+div.language-rust::after { content: "rust"; }
+div.language-yaml::after, div.language-yml::after { content: "yaml"; }
+div.language-json::after { content: "json"; }
+div.language-sql::after { content: "sql"; }
+div.language-latex::after, div.language-tex::after { content: "latex"; }
+
+/* Syntax: bold for the language's own words, italic for remarks, underline for things being named. */
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kc, .highlight .kr, .highlight .kt, .highlight .kp, .highlight .ow, .highlight .nb, .highlight .bp { font-weight: 600; }
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs, .highlight .ch, .highlight .cp, .highlight .cpf, .highlight .sd { font-style: italic; color: #55554f; }
+.highlight .nf, .highlight .fm, .highlight .nc, .highlight .nd { text-decoration: underline; text-underline-offset: .18em; }
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .se, .highlight .si, .highlight .sr, .highlight .ss { color: #2f2f2b; }
+.highlight .err { background: none; }
+
+.doc .body table, .note table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: .9em 0;
+  border-collapse: collapse;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: .76em;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--black) var(--white);
+}
+.doc .body th, .doc .body td, .note th, .note td { border: 1px solid var(--black); padding: .3em .6em; text-align: left; vertical-align: top; }
+.doc .body th, .note th { background: var(--black); color: var(--white); font-family: "Pixelify Sans", monospace; font-weight: 600; }
+.doc .body td[style*="right"], .note td[style*="right"] { text-align: right; }
+
+.doc .body img, .note img { display: block; max-width: 100%; height: auto; margin: .9em auto; border: 2px solid var(--black); background: #fff; }
+.doc .body img + em, .doc .body p > img:only-child + br + em { display: block; text-align: center; font-size: .86em; }
+.doc .body figure { margin: .9em 0; }
+.doc .body figcaption { font-size: .86em; font-style: italic; text-align: center; margin-top: .3em; }
+
+.doc .body sup a, .doc .body a.footnote { text-decoration: none; font-family: "Pixelify Sans", monospace; font-size: .8em; padding: 0 .1em; }
+.doc .body .footnotes { margin-top: 1.4em; padding-top: .6em; border-top: 2px solid var(--black); font-size: .86em; }
+.doc .body .footnotes ol { padding-left: 1.4em; margin: 0; }
+.doc .body .footnotes li { margin-bottom: .4em; }
+.doc .body a.reversefootnote { text-decoration: none; font-family: "Pixelify Sans", monospace; font-size: .85em; margin-left: .3em; }
+.doc .body ul, .doc .body ol, .note ul, .note ol { padding-left: 1.3em; }
+.doc .body li, .note li { margin-bottom: .25em; }
+.doc .body hr { border: 0; border-top: 2px solid var(--black); margin: 1.2em 0; }
+.doc .body dl dt { font-weight: 600; }
+.doc .body dl dd { margin: 0 0 .5em 1.2em; }

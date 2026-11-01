@@ -105,8 +105,23 @@
     open.forEach((o, k) => { o.style.zIndex = 10 + k; o.classList.toggle("front", o === w); });
     save();
   }
+  // A document not carried by this page is fetched from its own page the first time it is opened.
+  function fill(w) {
+    const b = w.querySelector(".body[data-src]");
+    if (!b || b.dataset.loaded) return;
+    b.dataset.loaded = "1";
+    fetch(b.dataset.src).then(r => r.text()).then(html => {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const src = doc.querySelector(".win.front .body");
+      if (!src) return;
+      b.innerHTML = src.innerHTML;
+      if (window.renderWriting) renderWriting(b);
+      layout();
+    }).catch(() => { delete b.dataset.loaded; });
+  }
   function unfold(w) {
     open = open.filter(o => o !== w).concat(w);
+    fill(w);
     layout(); save();
     (w.querySelector(".pane a") || w.querySelector(".close")).focus({ preventScroll: true });
   }
@@ -152,6 +167,7 @@
     });
   });
 
+  open.forEach(fill);
   layout();
   let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(layout, 80); });
   if (document.fonts) document.fonts.ready.then(layout);

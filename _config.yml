@@ -2,5 +2,12 @@ title: stuff
 description: Everything here, as windows on an upright paper-white screen.
 url: https://stuff.arnavraja.in
 author: Arnav Raja
+markdown: kramdown
+kramdown:
+  input: GFM
+  math_engine: mathjax
+  syntax_highlighter: rouge
+  hard_wrap: false
+  footnote_backlink: "back"
 exclude:
   - README.md

@@ -11,8 +11,22 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' shape-rendering='crispEdges'%3E%3Crect width='32' height='32' fill='%23121212'/%3E%3Crect x='7' y='2' width='18' height='28' fill='%23fff'/%3E%3Crect x='9' y='6' width='8' height='3' fill='%23000'/%3E%3Crect x='9' y='9' width='13' height='9' fill='none' stroke='%23000'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/alto.css?v={{ site.time | date: '%s' }}">
+<script>
+  // Typeset maths in whichever form kramdown leaves it: \( \) and \[ \] text, or kdmath elements holding $ or $$.
+  window.renderWriting = function (root) {
+    if (!window.katex) return;
+    root.querySelectorAll(".kdmath").forEach(function (el) {
+      var tex = el.textContent.trim().replace(/^\$\$?|\$\$?$/g, "");
+      try { katex.render(tex, el, { displayMode: el.tagName === "DIV", throwOnError: false }); } catch (e) {}
+    });
+    if (window.renderMathInElement) renderMathInElement(root, { delimiters: [{ left: "$$", right: "$$", display: true }, { left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }], ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"], throwOnError: false });
+  };
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous" onload="renderWriting(document.body); dispatchEvent(new Event('resize'));"></script>
 </head>
 <body>
 <h1 class="sr">stuff, by Arnav Raja</h1>
@@ -23,7 +37,7 @@
       <h2 class="tab">{{ t.name }}</h2>
       <div class="pane">
         {% if t.kind or t.year %}<p class="meta">{% if t.kind %}{{ t.kind }}{% endif %}{% if t.kind and t.year %}, {% endif %}{% if t.year %}{{ t.year }}{% endif %}</p>{% endif %}
-        {% if t.note %}<p class="note">{{ t.note }}</p>{% endif %}
+        {% if t.note %}<div class="note">{{ t.note | markdownify }}</div>{% endif %}
         {% if t.link %}<a class="go" href="{{ t.link }}">{{ t.link | remove_first: "https://" | remove_first: "http://" | split: "?" | first | split: "/" | join: "/" }}</a>{% endif %}
       </div>
     </section>
