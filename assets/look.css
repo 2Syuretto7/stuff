@@ -1,0 +1,69 @@
+:root { --g: clamp(16px, 3.5vw, 44px); --h: 200; --sat: 92%; }
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: "Inter Tight", system-ui, sans-serif;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
+  cursor: pointer;
+}
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.field {
+  position: fixed; inset: 0;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: var(--g);
+  text-align: center;
+  visibility: hidden;
+}
+.name {
+  margin: 0;
+  max-width: 100%;
+  font-family: "Anton", sans-serif;
+  font-size: 120px;
+  line-height: .92;
+  text-transform: uppercase;
+  letter-spacing: .005em;
+  overflow-wrap: normal;
+}
+.name a { color: inherit; text-decoration: none; }
+.meta, .note { margin: 0; font-size: clamp(15px, 1.3vw, 19px); line-height: 1.45; max-width: 34em; }
+.meta { margin-bottom: 1.4em; font-weight: 500; }
+.note { margin-top: 1.4em; }
+
+/* Looking: the whole screen is the thing. */
+body.looking { background: hsl(var(--h) var(--sat) 55%); color: #000; }
+body.looking .field { visibility: visible; }
+
+/* After: the opposite colour, burned in, fading. */
+body.after .field { visibility: visible; }
+body.after .meta, body.after .note { display: none; }
+body.after .name {
+  color: hsl(calc(var(--h) + 180) 85% 68%);
+  filter: blur(1.5px);
+  text-shadow: 0 0 18px hsl(calc(var(--h) + 180) 85% 60% / .7), 0 0 60px hsl(calc(var(--h) + 180) 85% 55% / .45);
+  animation: fade var(--fade, 4s) cubic-bezier(.4, 0, .9, .6) forwards;
+}
+body.after .name a { cursor: pointer; }
+body.after .name a:hover { filter: blur(0); }
+body.after .name a:focus-visible { filter: blur(0); outline: 3px solid currentColor; outline-offset: 8px; }
+@keyframes fade { 0% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+
+.ask {
+  position: fixed; left: 0; right: 0; bottom: var(--g);
+  margin: 0;
+  text-align: center;
+  font-size: 15px;
+  color: rgba(255, 255, 255, .6);
+  pointer-events: none;
+}
+body.looking .ask { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) { body.after .name { animation-timing-function: steps(1, end); } }

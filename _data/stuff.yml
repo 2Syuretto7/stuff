@@ -9,15 +9,15 @@
 #   link:  where it lives
 
 - name: arnavraja.in
-  kind: threshold
+  kind: clock
   year: 2026
-  note: A name made of a few thousand restless points. Click it and it comes apart; leave it alone and it remembers itself.
+  note: A clock that only runs while you keep perfectly still. It remembers every still second you have ever given it.
   link: https://arnavraja.in
 
 - name: blog
   kind: writing
   year: 2026
-  note: Everything written there sinks eighteen metres a day. To read something old you dive down to where it has got to.
+  note: One sentence at a time, pulled loose from everything written there. Follow it back to where it came from.
   link: https://blog.arnavraja.in
 
 - name: "Ashwater: The Bell Debt"
